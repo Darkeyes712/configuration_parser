@@ -1,11 +1,24 @@
 use std::collections::HashMap;
 
-// Define a trait for configuration parsing.
+/// A trait defining behavior for configuration parsing.
+///
+/// Implementors of this trait provide concrete logic for parsing configurations from various sources.
 pub trait ConfigParser {
+    /// Parse the provided source into a HashMap.
+    ///
+    /// # Arguments
+    ///
+    /// * `source`: The source file <name.cfg> from which to parse configurations.
+    ///
+    /// # Returns
+    ///
+    /// Returns a `Result` containing the parsed configurations or an error message.
     fn parse(&self, source: &str) -> Result<HashMap<String, String>, &'static str>;
 }
 
-// Default implementation for file-based configuration.
+/// Represents a file-based configuration parser.
+///
+/// Provides methods to parse configurations from files using a specified delimiter.
 pub struct FileConfigParser {
     delimiter: char,
 }
@@ -32,6 +45,9 @@ impl ConfigParser for FileConfigParser {
     }
 }
 
+/// Holds parsed configuration data.
+///
+/// Provides methods to retrieve configuration values by their keys.
 pub struct Config {
     data: HashMap<String, String>,
 }
